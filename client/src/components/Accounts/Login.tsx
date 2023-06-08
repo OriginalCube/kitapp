@@ -34,7 +34,8 @@ const Login = () => {
     if (e === "login") {
       const onLogin = await axios.post(api_url + "login", loginInput);
       try {
-        localStorage.setItem("usappToken", onLogin.data.token);
+        console.log(onLogin);
+        // localStorage.setItem("usappToken", onLogin.data.token);
       } catch (err) {
         console.log(err);
       }
@@ -42,7 +43,7 @@ const Login = () => {
       const onRegister = await axios.post(api_url + "create", registerInput);
       try {
         console.log(onRegister);
-        localStorage.setItem("usappToken", onRegister.data.token);
+        // localStorage.setItem("usappToken", onRegister.data.token);
       } catch (err) {
         console.log(err);
       }
@@ -55,7 +56,10 @@ const Login = () => {
         <div className="h-full w-full flex items-center justify-center">
           <div className="h-full w-1/3 bg-blue-700 rounded-md flex-col justify-center">
             <div className="w-5/6 h-1/3 m-auto flex-col">
-              <p className="text-4xl font-bold text-white">
+              <p
+                onClick={() => setHasAccount(!hasAccount)}
+                className="text-4xl font-bold text-white"
+              >
                 Welcome to KitaApp
               </p>
               <p className="text-xl font-light opacity-80 text-white">

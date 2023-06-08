@@ -3,8 +3,12 @@ const express = require("express"),
   PORT = process.env.PORT,
   app = express();
 
-app.get("/api/v1", (req, res) => {
-  res.send("Server Active");
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const connectDb = require("./config/Mongo");
+connectDb();
+
+app.use("/api/v1/profile", require("./routes/Account"));
 
 app.listen(PORT, () => console.log(`start listening on port ${PORT}`));

@@ -12,14 +12,6 @@ const Login = () => {
                 Start kita! with other people.
               </p>
             </div>
-            <div className="w-5/6 h-2/3 m-auto flex items-center">
-              <div className="border-2 w-full h-2/3">
-                <p className="text-xl font-medium opacity-80 text-justify">
-                  Where meaningful connections thrive. Join us today to connect,
-                  share, and inspire in a vibrant social media community.
-                </p>
-              </div>
-            </div>
           </div>
           <div className="h-full w-2/3 bg-white"></div>
         </div>

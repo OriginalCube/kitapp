@@ -3,7 +3,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const readDetails = async (req, res) => {
-  res.send("Account controller success!");
+  const userDetails = await AccountModel.findById(req.user.id);
+  if (userDetails) {
+    res.status(200).json(userDetails);
+  }
 };
 
 const createAccount = async (req, res) => {

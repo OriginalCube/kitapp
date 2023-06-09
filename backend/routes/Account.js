@@ -6,7 +6,9 @@ const {
   loginAccount,
 } = require("../controller/AccountsController");
 
-router.get("/details", readDetails);
+const { protect } = require("../middleware/authMiddleware");
+
+router.get("/details", protect, readDetails);
 
 router.post("/create", createAccount);
 

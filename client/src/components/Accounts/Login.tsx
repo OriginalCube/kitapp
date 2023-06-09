@@ -34,8 +34,7 @@ const Login = () => {
     if (e === "login") {
       const onLogin = await axios.post(api_url + "login", loginInput);
       try {
-        console.log(onLogin);
-        // localStorage.setItem("usappToken", onLogin.data.token);
+        localStorage.setItem("kitappToken", onLogin.data.token);
       } catch (err) {
         console.log(err);
       }

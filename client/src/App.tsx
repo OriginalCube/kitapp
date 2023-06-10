@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Login from "./components/Accounts/Login";
 import axios from "axios";
+import Main from "./components/Main";
 
 function App() {
   const [auth, setAuth] = React.useState("");
@@ -36,6 +37,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route index element={<Login />} />
+            <Route path="/dashboard" element={<Main />} />
           </Routes>
         </BrowserRouter>
       </div>

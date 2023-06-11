@@ -2,10 +2,12 @@ import React from "react";
 import LoginComponent from "./LoginFormat";
 import Register from "./RegisterFormat";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const api_url = "/api/v1/profile/";
   const [hasAccount, setHasAccount] = React.useState(true);
+  const navigate = useNavigate();
 
   const [registerInput, setRegisterInput] = React.useState({
     firstname: "",
@@ -35,6 +37,7 @@ const Login = () => {
       const onLogin = await axios.post(api_url + "login", loginInput);
       try {
         localStorage.setItem("kitappToken", onLogin.data.token);
+        navigate("/");
       } catch (err) {
         console.log(err);
       }

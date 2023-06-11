@@ -3,13 +3,12 @@ const Account = require("../model/AccountModel");
 
 const protect = async (req, res, next) => {
   let token;
-  console.log(req.headers.token);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    console.log(req.headers.authorization);
     try {
+      console.log(req.headers.authorization);
       // Get token from header
       token = req.headers.authorization.split(" ")[1];
 
@@ -22,8 +21,10 @@ const protect = async (req, res, next) => {
       next();
     } catch (err) {
       console.log(err);
+      res.status(401).json({ message: "User does is not logged in." });
     }
   }
+
   if (!token) {
     res.send("Not Token.");
   }

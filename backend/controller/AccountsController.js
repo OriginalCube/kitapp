@@ -44,10 +44,14 @@ const loginAccount = async (req, res) => {
   const { username, password } = req.body;
   const user = await AccountModel.findOne({ username });
 
-  if (user && (await bcrypt.compare(password, user.password))) {
-    res.json({ token: genJWT(user._id) });
-  } else {
-    res.json({ message: "Invalid Credentials." });
+  try {
+    if (user && (await bcrypt.compare(password, user.password))) {
+      res.status(200).json({ token: genJWT(user._id) });
+    } else {
+      res.json({ message: "Invalid Credentials." });
+    }
+  } catch (err) {
+    res.json({ message: "Invalid credentials." });
   }
 };
 

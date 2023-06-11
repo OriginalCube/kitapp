@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Main = () => {
+const Main = (props: any) => {
   const navigate = useNavigate();
 
   const AuthCheck = async () => {
@@ -13,9 +13,7 @@ const Main = () => {
         },
       });
       if (Auth) {
-        console.log(
-          "User is logged in token " + localStorage.getItem("kitappToken")
-        );
+        props.setAuth(localStorage.getItem("kitappToken"));
       }
     } catch (err) {
       console.log("account does not exist.");
@@ -26,7 +24,12 @@ const Main = () => {
   React.useEffect(() => {
     AuthCheck();
   }, []);
-  return <div className="w-full h-full"></div>;
+  return (
+    <div className="w-full h-auto flex">
+      <div className="w-1/2 h-auto"></div>
+      <div className="w-1/2 h-auto"></div>
+    </div>
+  );
 };
 
 export default Main;

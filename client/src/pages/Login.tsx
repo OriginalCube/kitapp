@@ -1,6 +1,6 @@
 import React from "react";
-import LoginComponent from "./LoginFormat";
-import Register from "./RegisterFormat";
+import LoginComponent from "../components/Accounts/LoginFormat";
+import Register from "../components/Accounts/RegisterFormat";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 

@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Post from "../components/dashboard/Post";
 
 const Main = (props: any) => {
   const navigate = useNavigate();
@@ -25,9 +26,11 @@ const Main = (props: any) => {
     AuthCheck();
   }, []);
   return (
-    <div className="w-full h-auto flex">
-      <div className="w-1/2 h-auto"></div>
-      <div className="w-1/2 h-auto"></div>
+    <div className="w-full h-screen flex bg-gray-200">
+      <div className="w-4/5 h-auto">
+        <Post />
+      </div>
+      <div className="w-1/5 h-auto"></div>
     </div>
   );
 };

@@ -11,4 +11,6 @@ connectDb();
 
 app.use("/api/v1/profile", require("./routes/Account"));
 
+app.use("/api/v1/posts", require("./routes/Posts"));
+
 app.listen(PORT, () => console.log(`start listening on port ${PORT}`));

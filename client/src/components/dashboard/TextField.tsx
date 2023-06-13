@@ -5,18 +5,19 @@ export const TextField = () => {
   const [focused, setFocused] = React.useState(true);
   const [textData, setTextData] = React.useState("");
 
-  const onSubmitted = async () => {
-    const api_url = "/v1/api/posts/";
+  const onSubmitted = async (e: any) => {
+    e.preventDefault();
+    const api_url = "/api/v1/posts/";
     const kitaToken = localStorage.getItem("kitappToken");
     try {
       const post = await axios.post(
         api_url + "create",
+        { textData: textData },
         {
           headers: {
             authorization: `Bearer ${kitaToken}`,
           },
-        },
-        { data: { textData: textData } }
+        }
       );
       console.log(post);
     } catch (err) {

@@ -10,7 +10,7 @@ const { protect } = require("../middleware/authMiddleware");
 
 router.get("/details", protect, readDetails);
 
-router.post("/create", createAccount);
+router.post("/create", protect, createAccount);
 
 router.post("/login", loginAccount);
 

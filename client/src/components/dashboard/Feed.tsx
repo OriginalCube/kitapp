@@ -1,11 +1,11 @@
 import React from "react";
 import PostFormat from "./PostFormat";
 
-const Feed = () => {
-  const [feed, setFeed] = React.useState([]);
+const Feed = (props: any) => {
+  console.log(props.post);
   return (
-    <div className="w-full h-auto p-2 border-2 border-black flex-col items-center justify-center">
-      {feed.length === 0 ? (
+    <div className="w-full h-auto p-2 flex-col items-center justify-center">
+      {props.post.length === 0 ? (
         <PostFormat
           image={"admin.jpeg"}
           username={"Admin"}
@@ -14,7 +14,16 @@ const Feed = () => {
           }
           _id={"#Admin"}
         />
-      ) : null}
+      ) : (
+        props.post.map((e: any, index: number) => (
+          <PostFormat
+            image={"admin.jpeg"}
+            username={"admin"}
+            feed={e.kita}
+            key={index}
+          />
+        ))
+      )}
     </div>
   );
 };

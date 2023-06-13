@@ -6,7 +6,9 @@ const Post = () => {
   return (
     <div className="h-auto w-5/6 m-auto">
       <TextField />
-      <Feed />
+      <div className="w-full h-auto bg-white relative top-40 rounded-xl shadow-xl">
+        <Feed />
+      </div>
     </div>
   );
 };

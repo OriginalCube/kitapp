@@ -12,9 +12,12 @@ const PostFormat = (props: any) => {
           />
         </div>
       </div>
-      <div className="w-full h-5/6 flex-col">
-        <p className="text-2xl font-bold">{props.username}</p>
-        <p className="text-xl font-light">{props.feed}</p>
+      <div className="w-full h-auto flex-col">
+        <p className="text-2xl font-bold">
+          {props.username}{" "}
+          <span className="font-medium text-xl">{props._id} </span>
+        </p>
+        <p className="text-xl font-light opacity-80">{props.feed}</p>
       </div>
     </div>
   );

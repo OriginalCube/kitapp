@@ -15,7 +15,6 @@ const Post = (props: any) => {
         },
       });
       setPost(postData.data);
-      console.log(postData);
     } catch (err) {
       console.log(err);
     }

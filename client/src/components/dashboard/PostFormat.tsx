@@ -1,7 +1,28 @@
 import React from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PostFormat = (props: any) => {
   const [isPost, setIsPost] = React.useState(false);
+  const api_url = "/api/v1/posts/";
+  const navigate = useNavigate();
+  console.log(props.p_id);
+
+  const removePost = async () => {
+    try {
+      const deletePost = await axios.delete(api_url + props.p_id, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("kitappToken")}`,
+        },
+      });
+      if (deletePost) {
+        navigate("/#");
+        console.log("deleted");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   React.useEffect(() => {
     if (props.id === props.c_id._id) {
@@ -23,8 +44,9 @@ const PostFormat = (props: any) => {
             </div>
             <div className="h-full w-1/2 flex items-center justify-center">
               <img
+                onClick={removePost}
                 src="./assets/icons/remove.png"
-                className="h-1/2 w-auto"
+                className="h-1/2 w-auto cursor-pointer"
                 alt=""
               />
             </div>

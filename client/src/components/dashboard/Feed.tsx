@@ -13,6 +13,7 @@ const Feed = (props: any) => {
               feed={e.kita}
               key={index}
               id={e.id}
+              p_id={e.p_id}
               c_id={props.userDetails}
             />
           ))}

@@ -10,6 +10,7 @@ const getPost = async (req, res) => {
     picture: "admin",
     kita: "Welcome to our vibrant social media community, where connections are forged, voices are amplified, and stories come alive. Join us and share your experiences, engage with like-minded individuals, and create lasting digital connections.",
   };
+  postInfo.push(adminPost);
   if (postData.length !== 0) {
     postData.forEach((element) => {
       const pData = {
@@ -17,13 +18,12 @@ const getPost = async (req, res) => {
         user: userDetails[0].username,
         picture: userDetails[0].picture,
         kita: element.kita,
+        p_id: element._id,
       };
       postInfo.push(pData);
     });
-    postInfo.push(adminPost);
-    res.json(postInfo);
+    res.json(postInfo.reverse());
   } else {
-    postInfo.push(adminPost);
     res.json(postInfo);
   }
 };
@@ -38,4 +38,19 @@ const createPost = async (req, res) => {
   res.json({ message: "Successfull Post" });
 };
 
-module.exports = { createPost, getPost };
+const deletePost = async (req, res) => {
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    res.json({ message: "Post not found." });
+  }
+
+  if (!req.user) {
+    res.json({ message: "User not found." });
+  }
+
+  await post.deleteOne();
+
+  res.json({ message: "Successfully Deleted Record." });
+};
+
+module.exports = { createPost, getPost, deletePost };

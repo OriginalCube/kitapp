@@ -11,9 +11,9 @@ const getPost = async (req, res) => {
     kita: "Welcome to our vibrant social media community, where connections are forged, voices are amplified, and stories come alive. Join us and share your experiences, engage with like-minded individuals, and create lasting digital connections.",
   };
   if (postData.length !== 0) {
-    console.log(userDetails);
     postData.forEach((element) => {
       const pData = {
+        id: userDetails[0]._id,
         user: userDetails[0].username,
         picture: userDetails[0].picture,
         kita: element.kita,

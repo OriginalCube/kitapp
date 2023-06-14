@@ -12,6 +12,8 @@ const Feed = (props: any) => {
               username={e.user}
               feed={e.kita}
               key={index}
+              id={e.id}
+              c_id={props.userDetails}
             />
           ))}
     </div>

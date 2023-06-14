@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Navigation = () => {
+const Navigation = (props: any) => {
   return (
     <div className="w-1/5 h-auto bg-gray-200 z-50">
       <div className="h-screen w-1/5 flex bg-white flex-col shadow-xl fixed">
@@ -38,8 +38,8 @@ const Navigation = () => {
             <Link to={"/profile"}>
               <div className="h-1/4 w-5/6 flex m-auto items-center cursor-pointer">
                 <img
-                  className="h-2/4 w-auto opacity-80"
-                  src="./assets/icons/search.png"
+                  className="h-2/4 w-auto opacity-80 rounded-full"
+                  src={`./assets/profile/${props.userDetails.picture}.webp`}
                   alt=""
                 />
                 <p className="w-full text-2xl text-center font-light opacity-80 p-2">

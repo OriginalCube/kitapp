@@ -8,14 +8,12 @@ const protect = async (req, res, next) => {
     req.headers.authorization.startsWith("Bearer")
   ) {
     try {
-      console.log(req.headers.authorization);
       // Get token from header
       token = req.headers.authorization.split(" ")[1];
 
       // Verify token
       const decoded = jwt.verify(token, process.env.KITAPP_SECRET);
 
-      console.log(decoded);
       req.user = await Account.findById(decoded.id).select("-password");
 
       next();

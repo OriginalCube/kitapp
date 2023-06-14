@@ -3,7 +3,7 @@ import { TextField } from "./TextField";
 import Feed from "./Feed";
 import axios, { AxiosResponse } from "axios";
 
-const Post = () => {
+const Post = (props: any) => {
   const [post, setPost] = React.useState<AxiosResponse | null | void>(null);
 
   const api_url = "/api/v1/posts/";
@@ -15,6 +15,7 @@ const Post = () => {
         },
       });
       setPost(postData.data);
+      console.log(postData);
     } catch (err) {
       console.log(err);
     }
@@ -25,8 +26,8 @@ const Post = () => {
   }, []);
 
   return (
-    <div className="h-auto w-5/6 m-auto">
-      <TextField />
+    <div className="h-auto w-5/6 m-auto ">
+      <TextField picture={props.userDetails.picture} />
       <div className="w-full h-auto bg-white relative top-40 rounded-xl shadow-xl">
         <Feed post={post} />
       </div>

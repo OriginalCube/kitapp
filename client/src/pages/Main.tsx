@@ -5,6 +5,7 @@ import Post from "../components/dashboard/Post";
 
 const Main = (props: any) => {
   const navigate = useNavigate();
+  const [userDetails, setUserDetaisl] = React.useState({});
 
   const AuthCheck = async () => {
     try {
@@ -15,6 +16,8 @@ const Main = (props: any) => {
       });
       if (Auth) {
         props.setAuth(localStorage.getItem("kitappToken"));
+        setUserDetaisl(Auth.data);
+        props.setUserDetails(Auth.data);
       }
     } catch (err) {
       console.log("account does not exist.");
@@ -25,10 +28,11 @@ const Main = (props: any) => {
   React.useEffect(() => {
     AuthCheck();
   }, []);
+
   return (
-    <div className="w-full h-screen flex bg-gray-200">
-      <div className="w-4/5 h-auto">
-        <Post />
+    <div className="w-full h-auto flex">
+      <div className="w-4/5 h-auto ">
+        <Post userDetails={userDetails} />
       </div>
       <div className="w-1/5 h-auto"></div>
     </div>

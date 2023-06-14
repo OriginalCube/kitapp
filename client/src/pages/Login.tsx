@@ -45,7 +45,8 @@ const Login = () => {
       const onRegister = await axios.post(api_url + "create", registerInput);
       try {
         console.log(onRegister);
-        // localStorage.setItem("usappToken", onRegister.data.token);
+        localStorage.setItem("usappToken", onRegister.data.token);
+        setHasAccount(true);
       } catch (err) {
         console.log(err);
       }

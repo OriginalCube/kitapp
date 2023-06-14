@@ -10,6 +10,7 @@ const readDetails = async (req, res) => {
 };
 
 const createAccount = async (req, res) => {
+  const porfilePicture = ["profile1", "profile2", "profile3", "profile4"];
   const { firstname, lastname, username, password, email, number, birthday } =
     req.body;
   try {
@@ -20,10 +21,14 @@ const createAccount = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+    const randomPicture = Math.floor(
+      Math.random() * (porfilePicture.length - 1)
+    );
     const createUser = AccountModel.create({
       firstname,
       lastname,
       username,
+      picture: porfilePicture[randomPicture],
       password: hashedPassword,
       email,
       number,

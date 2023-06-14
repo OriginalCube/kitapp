@@ -1,17 +1,16 @@
 import React from "react";
 import axios from "axios";
 
-export const TextField = () => {
+export const TextField = (props: any) => {
   const [focused, setFocused] = React.useState(true);
   const [textData, setTextData] = React.useState("");
+  const api_url = "/api/v1/";
+  const kitaToken = localStorage.getItem("kitappToken");
 
   const onSubmitted = async (e: any) => {
-    e.preventDefault();
-    const api_url = "/api/v1/posts/";
-    const kitaToken = localStorage.getItem("kitappToken");
     try {
       const post = await axios.post(
-        api_url + "create",
+        api_url + "posts/create",
         { textData: textData },
         {
           headers: {
@@ -37,7 +36,7 @@ export const TextField = () => {
             className="h-full flex items-center justify-center"
           >
             <img
-              src={`./assets/profile/admin.jpeg`}
+              src={`./assets/profile/${props.picture}.webp`}
               className="h-2/3 w-auto rounded-full"
               alt=""
             />

@@ -53,4 +53,20 @@ const deletePost = async (req, res) => {
   res.json({ message: "Successfully Deleted Record." });
 };
 
-module.exports = { createPost, getPost, deletePost };
+const updatePost = async (req, res) => {
+  console.log(req.body);
+  const update = await Post.findById(req.params.id);
+  if (!update) {
+    res.json({ message: "Post not found." });
+  }
+
+  if (!res.user) {
+    res.json({ message: "User not found." });
+  }
+
+  const UpdatePost = await Post.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+};
+
+module.exports = { createPost, getPost, deletePost, updatePost };

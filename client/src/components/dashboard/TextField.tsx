@@ -27,7 +27,7 @@ export const TextField = (props: any) => {
   return (
     <form onSubmit={onSubmitted}>
       <div
-        className={`relative top-24 w-full h-20 rounded-xl
+        className={`relative top-24 w-full h-20 rounded-xl overflow-hidden
        bg-white shadow flex-col items-center justify-center`}
       >
         <div className="w-auto h-full flex">

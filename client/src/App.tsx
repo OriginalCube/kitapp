@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import axios from "axios";
 import Main from "./pages/Main";
 import Navigation from "./components/Navigation";
+import Search from "./pages/Search";
 
 function App() {
   const [auth, setAuth] = React.useState("");
@@ -16,6 +17,12 @@ function App() {
         <div className="relative w-full h-auto z-10">
           <div className="w-full h-auto">
             <Routes>
+              <Route
+                path="/search"
+                element={
+                  <Search setUserDetails={setUserDetails} setAuth={setAuth} />
+                }
+              />
               <Route path="/accounts" element={<Login />} />
               <Route
                 index

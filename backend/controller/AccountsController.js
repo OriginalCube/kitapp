@@ -64,4 +64,12 @@ const genJWT = (id) => {
   return jwt.sign({ id }, process.env.KITAPP_SECRET, { expiresIn: "30d" });
 };
 
-module.exports = { readDetails, createAccount, loginAccount };
+const searchAccounts = async (req, res) => {
+  const users = await AccountModel.find({
+    username: { $regex: req.body.username },
+  });
+  const foundUsers = [];
+  res.json(req.body);
+};
+
+module.exports = { readDetails, createAccount, loginAccount, searchAccounts };

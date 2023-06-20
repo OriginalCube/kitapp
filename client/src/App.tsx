@@ -5,6 +5,7 @@ import axios from "axios";
 import Main from "./pages/Main";
 import Navigation from "./components/Navigation";
 import Search from "./pages/Search";
+import User from "./pages/User";
 
 function App() {
   const [auth, setAuth] = React.useState("");
@@ -23,6 +24,7 @@ function App() {
                   <Search setUserDetails={setUserDetails} setAuth={setAuth} />
                 }
               />
+              <Route path="/:id" element={<User userDetails={userDetails} />} />
               <Route path="/accounts" element={<Login />} />
               <Route
                 index

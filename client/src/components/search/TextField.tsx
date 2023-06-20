@@ -14,7 +14,7 @@ const TextField = (props: any) => {
     );
     try {
       if (searchInfo) {
-        console.log(searchInfo);
+        props.setUser(searchInfo.data);
       }
     } catch (err) {
       console.log(err);

@@ -65,11 +65,22 @@ const genJWT = (id) => {
 };
 
 const searchAccounts = async (req, res) => {
-  const users = await AccountModel.find({
-    username: { $regex: req.body.username },
-  });
-  const foundUsers = [];
-  res.json(req.body);
+  if (req.body.username.length !== 0) {
+    const users = await AccountModel.find({
+      username: { $regex: req.body.username },
+    });
+    let user = {};
+    let foundUsers = [];
+    users.forEach((element) => {
+      user = {
+        username: element.username,
+        picture: element.picture,
+      };
+      foundUsers.push(user);
+    });
+    console.log(req.body.username);
+    res.json(foundUsers);
+  }
 };
 
 module.exports = { readDetails, createAccount, loginAccount, searchAccounts };

@@ -27,7 +27,7 @@ export const TextField = (props: any) => {
   return (
     <form onSubmit={onSubmitted}>
       <div
-        className={`relative top-24 w-full h-20 rounded-xl overflow-hidden
+        className={`relative top-24 w-full h-20 rounded-xl 
        bg-white shadow flex-col items-center justify-center`}
       >
         <div className="w-auto h-full flex">
@@ -48,7 +48,7 @@ export const TextField = (props: any) => {
             <textarea
               value={textData}
               onChange={(e) => setTextData(e.target.value)}
-              className="w-full h-full p-4 outline-none text-xl"
+              className="w-full h-full p-4 outline-none text-xl rounded-xl"
               placeholder="Hey there!"
             ></textarea>
           </div>{" "}

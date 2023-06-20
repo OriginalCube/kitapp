@@ -82,7 +82,7 @@ const PostFormat = (props: any) => {
         </div>
       ) : null}
       <div className="w-full h-auto flex items-center justify-center border-b-2 border-gray-300">
-        <div className="w-36 h-48 flex items-center justify-center">
+        <div className="w-36 h-44 flex items-center justify-center">
           <div className="w-full h-full flex items-center justify-center">
             <img
               src={`./assets/profile/${props.image}`}

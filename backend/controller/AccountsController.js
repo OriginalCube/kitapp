@@ -9,6 +9,15 @@ const readDetails = async (req, res) => {
   }
 };
 
+const getUserDetails = async (req, res) => {
+  const userDetails = await AccountModel.find({ username: req.params.id });
+  const userDetail = {
+    username: userDetails[0].username,
+    picture: userDetails[0].picture,
+  };
+  res.json(userDetail);
+};
+
 const createAccount = async (req, res) => {
   const porfilePicture = ["profile1", "profile2", "profile3", "profile4"];
   const { firstname, lastname, username, password, email, number, birthday } =
@@ -83,4 +92,10 @@ const searchAccounts = async (req, res) => {
   }
 };
 
-module.exports = { readDetails, createAccount, loginAccount, searchAccounts };
+module.exports = {
+  readDetails,
+  getUserDetails,
+  createAccount,
+  loginAccount,
+  searchAccounts,
+};

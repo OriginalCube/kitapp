@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   readDetails,
+  getUserDetails,
   createAccount,
   loginAccount,
   searchAccounts,
@@ -10,6 +11,8 @@ const {
 const { protect } = require("../middleware/authMiddleware");
 
 router.get("/details", protect, readDetails);
+
+router.get("/:id", protect, getUserDetails);
 
 router.post("/create", createAccount);
 

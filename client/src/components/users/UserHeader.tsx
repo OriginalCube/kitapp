@@ -18,7 +18,7 @@ const UserHeader = (props: any) => {
       </div>
       <div className="w-1/2 h-full flex">
         <div>
-          <p></p>
+          <p>{props.userDetail.feed}</p>
         </div>
       </div>
     </div>

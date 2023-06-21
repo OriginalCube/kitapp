@@ -13,4 +13,6 @@ app.use("/api/v1/profile", require("./routes/Account"));
 
 app.use("/api/v1/posts", require("./routes/Posts"));
 
+app.use("/api/v1/follow", require("./routes/Follow"));
+
 app.listen(PORT, () => console.log(`start listening on port ${PORT}`));

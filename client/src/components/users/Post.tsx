@@ -8,6 +8,7 @@ const Post = (props: any) => {
   const [userDetail, setUserDetail] =
     React.useState<AxiosResponse | null | void>(null);
   const api_url = `/api/v1/`;
+
   const getPost = async () => {
     try {
       const postData = await axios.get(`${api_url}posts/${props.id}`, {
@@ -39,7 +40,7 @@ const Post = (props: any) => {
   return (
     <div className="h-auto w-5/6 m-auto ">
       <div className="w-full h-auto relative top-24">
-        <UserHeader userDetail={userDetail} />
+        <UserHeader userDetail={userDetail} id={props.id} />
       </div>
       <div className="w-full h-auto bg-white relative top-40 rounded-xl shadow-xl">
         <Feed userDetails={props.userDetails} post={post} />

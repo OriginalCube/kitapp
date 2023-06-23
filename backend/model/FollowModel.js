@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const FollowerModel = mongoose.Schema({
-  user: { type: String, require: true },
-  follower: { type: String, require: true },
+  follower: { type: String },
+  following: [{ type: String }],
 });
 
 module.exports = mongoose.model("follower", FollowerModel);

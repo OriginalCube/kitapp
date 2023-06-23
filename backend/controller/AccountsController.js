@@ -12,14 +12,15 @@ const readDetails = async (req, res) => {
 
 const getUserDetails = async (req, res) => {
   const userDetails = await AccountModel.find({ username: req.params.id });
-  const isFollowing = await Follow.find({
-    user: userDetails[0]._id,
+  const isFollowing = await Follow.findOne({
     follower: req.user.id,
+    following: userDetails[0]._id,
   });
+  console.log(isFollowing);
   const userDetail = {
     username: userDetails[0].username,
     picture: userDetails[0].picture,
-    follwer: isFollowing.length !== 0 ? false : true,
+    following: isFollowing ? "true" : "false",
   };
   res.json(userDetail);
 };

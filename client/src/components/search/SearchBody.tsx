@@ -9,7 +9,7 @@ const SearchBody = (props: any) => {
     return (
       <Link to={`/${el.username}`}>
         <div className="w-full h-24 mb-4 p-2">
-          <div className="w-full h-full flex border-b-2 border-gray-300">
+          <div className="w-full h-full flex">
             <div className="w-1/5 h-full flex items-center justify-center">
               <img
                 className="w-1/3 h-auto rounded-full"

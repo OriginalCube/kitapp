@@ -20,7 +20,7 @@ const getUserDetails = async (req, res) => {
   const userDetail = {
     username: userDetails[0].username,
     picture: userDetails[0].picture,
-    following: isFollowing ? "true" : "false",
+    following: isFollowing ? "follower" : "follow",
   };
   res.json(userDetail);
 };

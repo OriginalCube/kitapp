@@ -34,13 +34,9 @@ const UserHeader = (props: any) => {
             <p
               onClick={onFollow}
               className={`w-5/6 text-right text-xl font-bold cursor-pointer
-             ${
-               follower
-                 ? "hover:text-red-500 text-blue-500"
-                 : "hover:text-blue-500 text-black"
-             }`}
+             text-blue-500 hover:text-amber-500`}
             >
-              {follower === "true" ? "Follower" : "Follow"}
+              {props.userDetail.following}
             </p>
           </div>
         </>

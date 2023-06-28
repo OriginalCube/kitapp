@@ -1,9 +1,11 @@
 const Post = require("../model/PostModel");
 const Account = require("../model/AccountModel");
+const Follow = require("../model/FollowModel");
 
 const getPost = async (req, res) => {
   const postData = await Post.find({ user: req.user.id });
   const userDetails = await Account.find({ _id: req.user.id });
+  const following = await Follow.findOne({ follower: req.user.id });
   let postInfo = [];
   const adminPost = {
     user: "Admin",
@@ -11,6 +13,23 @@ const getPost = async (req, res) => {
     kita: "Welcome to our vibrant social media community, where connections are forged, voices are amplified, and stories come alive. Join us and share your experiences, engage with like-minded individuals, and create lasting digital connections.",
   };
   postInfo.push(adminPost);
+  if (following) {
+    following.following.forEach(async (element) => {
+      const followingInfo = await Account.findById(element);
+      const tempData = await Post.find({ user: element });
+      tempData.forEach((el) => {
+        const pData = {
+          id: element,
+          user: followingInfo.username,
+          picture: followingInfo.picture,
+          kita: el.kita,
+          p_id: el._id,
+        };
+        postInfo.push(tempData);
+      });
+    });
+  }
+
   if (postData.length !== 0) {
     postData.forEach((element) => {
       const pData = {
@@ -39,7 +58,6 @@ const createPost = async (req, res) => {
 };
 
 const getUserPost = async (req, res) => {
-  console.log(req.params.id);
   const userDetails = await Account.find({ username: req.params.id });
   const userPost = await Post.find({ user: userDetails[0]._id });
   let userPosts = [];

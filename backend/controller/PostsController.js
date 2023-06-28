@@ -13,37 +13,41 @@ const getPost = async (req, res) => {
     kita: "Welcome to our vibrant social media community, where connections are forged, voices are amplified, and stories come alive. Join us and share your experiences, engage with like-minded individuals, and create lasting digital connections.",
   };
   postInfo.push(adminPost);
+
   if (following) {
     following.following.forEach(async (element) => {
       const followingInfo = await Account.findById(element);
       const tempData = await Post.find({ user: element });
       tempData.forEach((el) => {
-        const pData = {
+        const followingData = {
           id: element,
           user: followingInfo.username,
           picture: followingInfo.picture,
           kita: el.kita,
           p_id: el._id,
         };
-        postInfo.push(tempData);
+        postInfo.push(followingData);
       });
-    });
-  }
-
-  if (postData.length !== 0) {
-    postData.forEach((element) => {
-      const pData = {
-        id: userDetails[0]._id,
-        user: userDetails[0].username,
-        picture: userDetails[0].picture,
-        kita: element.kita,
-        p_id: element._id,
-      };
-      postInfo.push(pData);
+      console.log(postInfo);
+      console.log("it is pushed.");
     });
     res.json(postInfo.reverse());
   } else {
-    res.json(postInfo);
+    if (postData.length !== 0) {
+      postData.forEach((element) => {
+        const pData = {
+          id: userDetails[0]._id,
+          user: userDetails[0].username,
+          picture: userDetails[0].picture,
+          kita: element.kita,
+          p_id: element._id,
+        };
+        postInfo.push(pData);
+      });
+      res.json(postInfo.reverse());
+    } else {
+      res.json(postInfo);
+    }
   }
 };
 

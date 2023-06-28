@@ -14,6 +14,7 @@ const Post = (props: any) => {
           authorization: `Bearer ${localStorage.getItem("kitappToken")}`,
         },
       });
+      console.log(postData);
       setPost(postData.data);
     } catch (err) {
       console.log(err);

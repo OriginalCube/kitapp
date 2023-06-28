@@ -15,23 +15,24 @@ const getPost = async (req, res) => {
   postInfo.push(adminPost);
 
   if (following) {
-    following.following.forEach(async (element) => {
-      const followingInfo = await Account.findById(element);
-      const tempData = await Post.find({ user: element });
-      tempData.forEach((el) => {
+    for (let i = 0; i < following.following.length; i++) {
+      // Fix element substitutes
+      const followingInfo = await Account.findById(following.following[i]);
+      const tempData = await Post.find({ user: following.following[i] });
+      for (let x = 0; x < tempData.length; x++) {
         const followingData = {
-          id: element,
+          id: tempData[x],
           user: followingInfo.username,
           picture: followingInfo.picture,
           kita: el.kita,
           p_id: el._id,
         };
         postInfo.push(followingData);
-      });
-      console.log(postInfo);
-      console.log("it is pushed.");
-    });
-    res.json(postInfo.reverse());
+      }
+    }
+    console.log("Sending...");
+    console.log(postInfo);
+    res.json(postInfo);
   } else {
     if (postData.length !== 0) {
       postData.forEach((element) => {

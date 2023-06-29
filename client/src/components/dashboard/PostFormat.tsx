@@ -52,7 +52,7 @@ const PostFormat = (props: any) => {
   };
 
   React.useEffect(() => {
-    if (props.id === props.c_id._id) {
+    if (props.p_id === props.c_id._id) {
       setIsPost(true);
     }
   }, [props.id]);

@@ -5,48 +5,46 @@ const Follow = require("../model/FollowModel");
 const getPost = async (req, res) => {
   const postData = await Post.find({ user: req.user.id });
   const userDetails = await Account.find({ _id: req.user.id });
-  const following = await Follow.findOne({ follower: req.user.id });
+  const isFollowing = await Follow.findOne({ follower: req.user.id });
   let postInfo = [];
   const adminPost = {
     user: "Admin",
     picture: "admin",
     kita: "Welcome to our vibrant social media community, where connections are forged, voices are amplified, and stories come alive. Join us and share your experiences, engage with like-minded individuals, and create lasting digital connections.",
   };
-  postInfo.push(adminPost);
 
-  if (following) {
-    for (let i = 0; i < following.following.length - 1; i++) {
-      // Fix element substitutes
-      const followingInfo = await Account.findById(following.following[i]);
-      const tempData = await Post.find({ user: following.following[i] });
-      for (let x = 0; x < tempData.length; x++) {
-        const followingData = {
-          id: tempData[x]._id,
-          user: followingInfo.username,
-          picture: followingInfo.picture,
-          kita: tempData[x].kita,
-          p_id: tempData[x]._id,
+  if (isFollowing) {
+    console.log("Does follow someone");
+    for (let i = 0; i < isFollowing.following.length; i++) {
+      const followingPostInfo = await Post.find({
+        user: isFollowing.following[i],
+      });
+      const folllowingInfo = await Account.findById(isFollowing.following[i]);
+      for (let x = 0; x < followingPostInfo.length; x++) {
+        const createPost = {
+          user: folllowingInfo.username,
+          picture: folllowingInfo.picture,
+          kita: followingPostInfo[x].kita,
         };
-        postInfo.push(followingData);
+        postInfo.push(createPost);
       }
     }
-    res.json(postInfo);
-  } else {
-    if (postData.length !== 0) {
-      postData.forEach((element) => {
-        const pData = {
-          id: userDetails[0]._id,
-          user: userDetails[0].username,
-          picture: userDetails[0].picture,
-          kita: element.kita,
-          p_id: element._id,
-        };
-        postInfo.push(pData);
-      });
-      res.json(postInfo.reverse());
-    } else {
-      res.json(postInfo);
+    const getOwnPost = await Post.find({ user: req.user.id });
+    for (let i = 0; i < getOwnPost.length; i++) {
+      console.log(userDetails);
+      const createPost = {
+        user: userDetails[0].username,
+        picture: userDetails[0].picture,
+        kita: getOwnPost[i].kita,
+        p_id: getOwnPost[i].user,
+      };
+      postInfo.push(createPost);
     }
+    res.json(postInfo.reverse());
+  } else {
+    console.log("Does not follow someone");
+    postInfo.push(adminPost);
+    res.json(postInfo);
   }
 };
 

@@ -15,23 +15,21 @@ const getPost = async (req, res) => {
   postInfo.push(adminPost);
 
   if (following) {
-    for (let i = 0; i < following.following.length; i++) {
+    for (let i = 0; i < following.following.length - 1; i++) {
       // Fix element substitutes
       const followingInfo = await Account.findById(following.following[i]);
       const tempData = await Post.find({ user: following.following[i] });
       for (let x = 0; x < tempData.length; x++) {
         const followingData = {
-          id: tempData[x],
+          id: tempData[x]._id,
           user: followingInfo.username,
           picture: followingInfo.picture,
-          kita: el.kita,
-          p_id: el._id,
+          kita: tempData[x].kita,
+          p_id: tempData[x]._id,
         };
         postInfo.push(followingData);
       }
     }
-    console.log("Sending...");
-    console.log(postInfo);
     res.json(postInfo);
   } else {
     if (postData.length !== 0) {
@@ -99,7 +97,6 @@ const deletePost = async (req, res) => {
 };
 
 const updatePost = async (req, res) => {
-  console.log(req.body);
   const update = await Post.findById(req.params.id);
   if (!update) {
     res.json({ message: "Post not found." });

@@ -14,17 +14,17 @@ const isFollower = async (req, res) => {
 };
 
 const follow = async (req, res) => {
+  //How did this work -.-
   const id = req.params.id;
   const following = await AccountModel.findOne({ username: id });
-
   const isFollower = await FollowModel.findOne({ follower: req.user._id });
-
   if (isFollower) {
+    console.log(isFollower.follower);
+    console.log("isFollower");
     const isFollowing = await FollowModel.findOne({
       follower: req.user._id,
       following: following._id,
     });
-    console.log(isFollowing);
     if (isFollowing) {
       const createFollow = await FollowModel.findOneAndUpdate(
         { follower: req.user.id },
@@ -44,12 +44,16 @@ const follow = async (req, res) => {
     }
   } else {
     //First Follow
-    const createFollow = await FollowModel.create({
-      follower: req.user.id,
-      following: following._id,
-    });
     console.log("creating new file");
-    console.log(createFollow._id);
+    console.log(following._id);
+    try {
+      const createFollow = await FollowModel.create({
+        follower: req.user.id,
+        following: following._id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
     res.json({ message: "following" });
   }
 };

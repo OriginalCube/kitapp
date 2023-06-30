@@ -6,6 +6,7 @@ import Main from "./pages/Main";
 import Navigation from "./components/Navigation";
 import Search from "./pages/Search";
 import User from "./pages/User";
+import Profile from "./pages/Profile";
 
 function App() {
   const [auth, setAuth] = React.useState("");
@@ -25,6 +26,12 @@ function App() {
                 }
               />
               <Route path="/:id" element={<User userDetails={userDetails} />} />
+              <Route
+                path="/profile"
+                element={
+                  <Profile setUserDetails={setUserDetails} setAuth={setAuth} />
+                }
+              />
               <Route path="/accounts" element={<Login />} />
               <Route
                 index

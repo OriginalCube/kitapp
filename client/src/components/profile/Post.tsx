@@ -6,7 +6,7 @@ import axios, { AxiosResponse } from "axios";
 const Post = (props: any) => {
   const [post, setPost] = React.useState<AxiosResponse | null | void>(null);
 
-  const api_url = "/api/v1/posts/";
+  const api_url = "/api/v1/posts/user/post";
   const getPost = async () => {
     try {
       const postData = await axios.get(api_url, {

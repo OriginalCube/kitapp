@@ -29,23 +29,40 @@ const getPost = async (req, res) => {
         postInfo.push(createPost);
       }
     }
-    const getOwnPost = await Post.find({ user: req.user.id });
-    for (let i = 0; i < getOwnPost.length; i++) {
-      console.log(userDetails);
-      const createPost = {
-        user: userDetails[0].username,
-        picture: userDetails[0].picture,
-        kita: getOwnPost[i].kita,
-        p_id: getOwnPost[i].user,
-      };
-      postInfo.push(createPost);
-    }
+    // const getOwnPost = await Post.find({ user: req.user.id });
+    // for (let i = 0; i < getOwnPost.length; i++) {
+    //   console.log(userDetails);
+    //   const createPost = {
+    //     user: userDetails[0].username,
+    //     picture: userDetails[0].picture,
+    //     kita: getOwnPost[i].kita,
+    //     p_id: getOwnPost[i].user,
+    //   };
+    //   postInfo.push(createPost);
+    // }
     res.json(postInfo.reverse());
   } else {
     console.log("Does not follow someone");
     postInfo.push(adminPost);
     res.json(postInfo);
   }
+};
+
+const profilePost = async (req, res) => {
+  const getUser = await Account.findById(req.user.id);
+  const getPost = await Post.find({ user: req.user.id });
+  let postInfo = [];
+  console.log(getUser);
+  for (let i = 0; i < getPost.length; i++) {
+    const createPost = {
+      user: getUser.username,
+      picture: getUser.picture,
+      kita: getPost[i].kita,
+      p_id: getPost[i].user,
+    };
+    postInfo.push(createPost);
+  }
+  res.json(postInfo);
 };
 
 const createPost = async (req, res) => {
@@ -109,4 +126,11 @@ const updatePost = async (req, res) => {
   });
 };
 
-module.exports = { createPost, getPost, getUserPost, deletePost, updatePost };
+module.exports = {
+  createPost,
+  getPost,
+  getUserPost,
+  deletePost,
+  updatePost,
+  profilePost,
+};
